@@ -8,7 +8,7 @@ function List()
     useEffect(  ()=>{
                const getAllinvoce=async()=>{
            let data=await getInvoice()
-           console.log(data.data.list)
+           console.log(data)
            console.log("from list.jsx")
            setinvoice(data.data.list)
            localStorage.setItem("invoice",JSON.stringify(data.data.list))
@@ -40,20 +40,19 @@ function List()
           </div>
           <table className="table table-striped" >
           <tr>
-        <th>id</th>
+        <th>Invoice NO</th>
          <th>Date</th>
         <th>Category</th>
         <th>Party Name</th>
         <th>Total</th>
         <th>Action</th>
         
-        <th>Delete</th>
 
 
          </tr>
           {Invoice.map((item)=>
                <tr>
-               <td>{item.invoice_id}</td>
+               <td>{item.invoice_no}</td>
 
                <td>{item.Date}</td>
                <td>{item.category_name}</td>
@@ -65,7 +64,6 @@ function List()
                     <NavLink  to={`/proceed_out/${item.invoice_id}`} > <button className="btn btn-primary "> Procced Out</button>  </NavLink>
                     <NavLink  to={`/proceed_in/${item.invoice_id}`} > <button className="btn btn-primary "> Procced in</button>  </NavLink>
                     
-                    <NavLink  to={`/invoice-list/delete/${item.invoice_id}`} > <button className="btn btn-danger "> Delete </button>  </NavLink>
                     
                     </td> 
       

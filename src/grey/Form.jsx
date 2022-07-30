@@ -210,7 +210,7 @@ function Form(Props)
             </button>
             <button type="button" className="btn btn-info text-light m-1">
               <i className="fa fa-list-alt me-1"></i> 
-              <NavLink to="/list" className="text-light text-decoration-none">View All</NavLink>
+              <NavLink to="/invoice-list" className="text-light text-decoration-none">View All</NavLink>
             </button>      
           </div>
         </form>
