@@ -10,11 +10,17 @@ function Create()
         {   
           let data= await CreateCategory(values)
           console.log(data.data)
-         let AllData= localStorage.getItem('List')
-         AllData=JSON.parse(AllData)
-         console.log(AllData)
-         AllData.push(data.data)
-         localStorage.setItem('List',JSON.stringify(AllData))
+          let AllData= localStorage.getItem('List')
+          if(AllData != null){
+  
+              AllData=JSON.parse(AllData)
+              console.log(AllData)
+              AllData.push(data.data)
+              localStorage.setItem('List',JSON.stringify(AllData))
+                       }
+           else{
+             console.log("nulll")
+           }
             navigate('/category-list')
         }
     return(

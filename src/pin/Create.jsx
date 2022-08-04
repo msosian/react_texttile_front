@@ -11,10 +11,18 @@ function Create()
           let data= await CreateEntry(values)
           console.log(data)
          let AllData= localStorage.getItem('pin')
-         AllData=JSON.parse(AllData)
-         console.log(AllData)
-         AllData.push(data.data) 
-         localStorage.setItem('pin',JSON.stringify(AllData))
+         if(AllData != null){
+  
+            AllData=JSON.parse(AllData)
+            console.log(AllData)
+             AllData.push(data.data)
+             localStorage.setItem('pin',JSON.stringify(AllData))
+            
+           }
+           else{
+             console.log("nulll")
+           }
+    
             navigate('/pin-list')
         }
     return(

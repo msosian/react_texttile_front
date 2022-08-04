@@ -12,10 +12,16 @@ function Create()
           let data= await createEntry(values)
           console.log(data) 
           let AllData= localStorage.getItem('Expenses')
-          AllData=JSON.parse(AllData)
-          console.log(AllData)
-          AllData.push(data.data)
-          localStorage.setItem('Expenses',JSON.stringify(AllData))
+          if(AllData != null){
+  
+             AllData=JSON.parse(AllData)
+             console.log(AllData)
+             AllData.push(data.data)
+             localStorage.setItem('Expenses',JSON.stringify(AllData))
+           }
+           else{
+             console.log("nulll")
+           }
             navigate('/expenses-list')
         }
     return(

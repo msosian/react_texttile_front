@@ -1,7 +1,18 @@
 
 export const getType=()=>fetch('http://localhost/sites/project/expenseType/type').then(res=>res.json())
 export const getMode=()=>fetch('http://localhost/sites/project/payment/payment').then(res=>res.json())
-           
+     
+export const getReport=(input)=>fetch(`http://localhost/sites/project/expenses/report`,{
+    method:"POST",
+    headers:{
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    },
+    body:JSON.stringify(input)  
+}).then(res=>res.json()) 
+
+export const getReportM=()=>fetch(`http://localhost/sites/project/expenses/reportm`).then(res=>res.json())
+
 export const getexpense=()=>fetch(`http://localhost/sites/project/expenses/expenses`).then(res=>res.json()) 
 export const createEntry=(input)=>fetch('http://localhost/sites/project/expenses/add',{
     method:"POST",

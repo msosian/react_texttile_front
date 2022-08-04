@@ -1,5 +1,5 @@
 import Form from "./Form";
-import {UpdatePout,EditPout,getRecord,getParty} from './api'
+import {UpdatePout,EditPout,getParty} from './api'
 import React, { useEffect, useState } from "react"
 import {useNavigate,useParams } from"react-router-dom"
 import {NavLink} from "react-router-dom"
@@ -10,30 +10,28 @@ function Update()
     var {id}=useParams()
     var[parties,setParties]=useState([])
     var [temp,setTemp]=useState([])
-    var [values,setValues]=useState([])
-    var [records,setRecords]=useState([
-        {
-            name:"",
-            piece:"",
-            size:"",
+    var [records,setRecords]=useState(
+      {
+        name:"",
+        Date:"",
+        piece:"",
+        size:"",
             item_id:"",
             invoice_id:"",
-            invoice_no:"",
             party_id:"",
             party_name:"",
             category_unit:"",
             lot_no:""
-        }])
+        })
 
-   
+        
    async function HandelSubmit(event)
     {
         event.preventDefault()
-         console.log(values)
-        var responce=await UpdatePout(values)
+        var responce=await UpdatePout(records)
         var data=responce.data
         console.log(responce)
-       let AllData= localStorage.getItem("pin")
+       let AllData= localStorage.getItem("pout")
         AllData=JSON.parse(AllData);
         let findelem=()=>{
             for (let index = 0; index <AllData.length; index++) {
@@ -49,27 +47,28 @@ function Update()
             }                   
            }
         let update_elm=findelem()
-        localStorage.setItem("pin",JSON.stringify(update_elm))
+        localStorage.setItem("pout",JSON.stringify(update_elm))
 
-        setValues(data)
-        // nevigate('/pin-list')
+        setRecords(data)
+        nevigate('/list-entries')
     }
     useEffect(()=>{
        const fetchUser=async ()=>{
-            const User=await EditPout(id)
-             console.log(User)
-            setValues(User[0])
-            fetchData(User[0].invoice_id)
+            const data=await EditPout(id)
+            console.log("hfsfh")
+             console.log(data.data.list[0])
+            setRecords(data.data.list[0])
+          
+            // fetchData(User[0].invoice_id)
         }
-        const fetchData=async(a)=>{
-             console.log(a)
-            const data=await getRecord(a) 
-            console.log(data)
-            setRecords(data.data.list)
-        }
+        // const fetchData=async(a)=>{
+        //      console.log(a)
+        //     const data=await getRecord(a) 
+        //     console.log(data)
+        //     setRecords(data.data.list)
+        // }
         const fetchParties=async ()=>{
             const data=await getParty()
-            console.log(data)
             setParties(data.data.list)
         }
 
@@ -80,11 +79,10 @@ function Update()
     { 
       let name=event.target.name
       let value=event.target.value
-        console.log("change")
-      setValues((pre)=>{
+      setRecords((pre)=>{
         return{
        ...pre,
-       [name]:value,  
+        [name]:value,  
      }
    })
    }
@@ -100,25 +98,24 @@ function Update()
           
         <form autoComplete="off" onSubmit={HandelSubmit} method="POST">
         <div className="form-group w-full">
-              <label>Lot No : <b>{records[0].lot_no}</b></label><br/> 
-              <input type="hidden" name="lot_no" value={records[0].lot_no} />
+              <label>Lot No : <b>{records.lot_no}</b></label><br/> 
+              <input type="hidden" name="lot_no" value={records.lot_no} />
                        </div>
             
             <div className="form-group w-full">
-              <label>Invoice No : <b>{records[0].invoice_no}</b></label><br/> 
-              <input type="hidden" name="invoice_no" value={records[0].invoice_no} />
+              <label>Invoice id : <b>{records.invoice_id}</b></label><br/> 
+              <input type="hidden" name="invoice_no" value={records.invoice_no} />
                
                        </div>
         <div className="form-group">
               <label> Date </label><br/>
-              <input name="Date" type="date" onChange={HandelChange} value={values.Date}   className="form-control mb-3 mt-2"  />
+              <input name="Date" type="date" onChange={HandelChange} value={records.Date}   className="form-control mb-3 mt-2"  />
           </div>    
           <div className="form-group">
               <label>Party Name</label><br/>
-              <select name="party_id" value={values.party_id} onChange={HandelChange}>
+              <select name="party_id" value={records.party_id} onChange={HandelChange}>
               <option >Select A choice</option>
          {parties.map((elm,index)=>{
-           console.log(elm)
             if(elm.party_type === "5" || elm.party_type === "4" || elm.party_type === "0" ){
               temp[index]=elm
             }
@@ -133,20 +130,17 @@ function Update()
           </div>
 
 
-          <div className="form-group w-full">
-              <label>item Name : <b>{records[0].name}</b></label><br/> 
-              <input type="hidden" name="item"  value={values.item_id}  />
-                       </div>
+           
+              <input type="hidden" name="item"  value={records.item_id}  />
 
           <div className="form-group">
             <label>Piece</label>
-            <b> <span>Total {records[0].piece}</span> </b><br/>
-            <input type="number" name="piece"  onChange={HandelChange}    className="form-control mb-3 mt-2"  value={values.piece} placeholder="pieces for proceed In" />
+            <input type="number" name="piece"  onChange={HandelChange}    className="form-control mb-3 mt-2"  value={records.piece} placeholder="pieces for proceed In" />
           </div>
           <div className="form-group">
-                   <b>{records[0].category_unit}</b>
-            <input type="number" name="size" onChange={HandelChange}  className="form-control mb-3 mt-2" placeholder="size" value={values.size}  />
-            <input type="hidden" name="categosry_unit" value={records[0].category_unit} />
+                   <b>{records.category_unit}</b>
+            <input type="number" name="size" onChange={HandelChange}  className="form-control mb-3 mt-2" placeholder="size" value={records.size}  />
+            <input type="hidden" name="categosry_unit" value={records.category_unit} />
 
           </div>
           

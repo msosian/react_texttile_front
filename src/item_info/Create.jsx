@@ -11,10 +11,16 @@ function Create()
           let data= await CreateItem(values)
           console.log(data.data)
          let AllData= localStorage.getItem('ItemList')
-         AllData=JSON.parse(AllData)
-         console.log(AllData)
-         AllData.push(data.data)
-         localStorage.setItem('ItemList',JSON.stringify(AllData))
+         if(AllData != null){
+  
+             AllData=JSON.parse(AllData)
+             console.log(AllData)
+             AllData.push(data.data)
+             localStorage.setItem('ItemList',JSON.stringify(AllData))
+           }
+           else{
+             console.log("nulll")
+           }
             navigate('/item-list')
         }
     return(

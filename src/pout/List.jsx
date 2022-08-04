@@ -33,8 +33,8 @@ function List()
 
 <div className="d-flex vh-100 align-items-center justify-content-center" >
         <div className="col-md-10 col-sm-6 p-4 rounded shadow m-3" style={{backgroundColor: "#fff;"}}>
-      <div>
-       <h3 className="col-md-6 mb-3 text-center">Category List</h3>
+        <div className="mb-3 row d-flex align-items-center"><NavLink className="btn btn-secondary col-md-6 mb-3 m-auto" to="/invoice-list"><i className="fa fa-plus me-1"></i> Invoice List </NavLink> <h3 className="col-md-6 mb-3 text-center">Proceedd Out List</h3>
+      
           </div>
           <table className="table table-striped" >
           <tr>
@@ -43,6 +43,8 @@ function List()
         <th>invoice_id</th>
         <th>item</th>
         <th>Party</th>
+        <th>Lot No.</th>
+
         <th>Category</th>
         <th>piece</th>
         <th>size</th>
@@ -58,6 +60,8 @@ function List()
                <td>{item.invoice_id}</td>
                <td>{item.item_id}</td>
                <td>{item.party_id}</td>
+               <td>{item.lot_no}</td>
+
                <td>{item.category_unit}</td>
                <td>{item.piece}</td>
                <td>{item.size}</td>

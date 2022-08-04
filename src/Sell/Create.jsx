@@ -12,11 +12,16 @@ function Create()
           let data= await createSell(values)
           console.log(data) 
           let AllData= localStorage.getItem('sell')
-
-              AllData=JSON.parse(AllData)
-              console.log(AllData)
-              AllData.push(data.data)
-              localStorage.setItem('sell',JSON.stringify(AllData))
+          if(AllData != null){
+  
+            AllData=JSON.parse(AllData)
+            console.log(AllData)
+             AllData.push(data.data)
+             localStorage.setItem('sell',JSON.stringify(AllData))
+           }
+           else{
+             console.log("nulll")
+           }
               navigate('/sell-list')
         }
     return(

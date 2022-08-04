@@ -194,7 +194,7 @@ function Form(Props)
 
           <div className="form-group">
             <label>Rate</label><br/>
-            <input type="number"  name="rate" onKeyUp={HandelChange} onMouseEnter={calculate}   className="form-control mb-3 mt-2"  placeholder="rate" />
+            <input type="number"  name="rate" onKeyUp={HandelChange}    className="form-control mb-3 mt-2"  placeholder="rate" />
           </div>
          
           <div className="form-group">

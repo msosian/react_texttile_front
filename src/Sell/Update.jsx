@@ -18,6 +18,8 @@ function Update()
         var data=responce.data
         console.log(responce)
        let AllData= localStorage.getItem("sell")
+       if(AllData != null){
+  
         AllData=JSON.parse(AllData);
         let findelem=()=>{
             for (let index = 0; index <AllData.length; index++) {
@@ -36,8 +38,13 @@ function Update()
         let update_elm=findelem()
         localStorage.setItem("sell",JSON.stringify(update_elm))
 
+       }
+       else{
+         console.log("nulll")
+       }
+      
         setValues(data)
-        // nevigate('/sell-list')
+        nevigate('/sell-list')
     }
     useEffect(()=>{
        const fetchUser=async ()=>{
